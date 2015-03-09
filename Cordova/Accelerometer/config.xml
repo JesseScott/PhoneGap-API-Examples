@@ -2,7 +2,7 @@
 <widget id="ca.ecuad.accelerometer" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Accelerometer</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A sample Apache Cordova application that shows the Accelerometer.
     </description>
     <author email="jesse@ecuad.ca" href="http://www.ecuad.ca/people/profile/234660">
         Jesse Scott | ECUAD | (based off of code from the Apache Cordova Team)

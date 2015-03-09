@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="ca.ecuad.camera" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <name>Camera</name>
+    <description>
+        A sample Apache Cordova application that shows the Camera usage.
+    </description>
+    <author email="jesse@ecuad.ca" href="http://www.ecuad.ca/people/profile/234660">
+        Jesse Scott | ECUAD | (based off of code from the Apache Cordova Team)
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
