@@ -10,7 +10,7 @@
 
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        
+
         <title>Camera Demo</title>
     </head>
     <body>
@@ -22,11 +22,11 @@
 			<button id="choose" >Choose Image</button>
 	        <img id="finalImage" style="max-height: 100%; max-width: 100%;"></img>
         </div>
-        
+
 
 
         <script type="text/javascript">
-  			document.addEventListener("deviceready", onDeviceReady, false); 
+  			document.addEventListener("deviceready", onDeviceReady, false);
 
 			function onDeviceReady() {
 				var cap = document.getElementById("capture");
@@ -34,31 +34,31 @@
 				var pick = document.getElementById("choose");
 				pick.addEventListener("click",chooseImage());
 			}
-			
+
 			// Shoot
 			function captureImage(){
-				var cameraOptions = { 
-					quality: 50, 
-					destinationType: Camera.DestinationType.DATA_URL 
+				var cameraOptions = {
+					quality: 50,
+					destinationType: Camera.DestinationType.DATA_URL
 				};
-				navigator.camera.getPicture( onSuccess, onError, cameraOptions);
+				navigator.camera.getPicture( onCameraImageSuccess, onCameraImageError, cameraOptions);
 			};
-			
-			function onSuccess(imageData) {
-				var image = document.getElementById('finalImage'); 
+
+			function onCameraImageSuccess(imageData) {
+				var image = document.getElementById('finalImage');
 				image.src = "data:image/jpeg;base64," + imageData;
 			}
-			
-			function onError(error) { 
+
+			function onCameraImageError(error) {
 				alert('code: ' + error.code + '\n' +'message: ' + error.message + '\n');
 			}
-			
+
 			// Pick
 			function chooseImage(source) {
-				var libraryOptions = { 
-					quality: 50, 
-					destinationType: Camera.DestinationType.FILE_URI, 
-					sourceType: Camera.PictureSourceType.PHOTOLIBRARY 	
+				var libraryOptions = {
+					quality: 50,
+					destinationType: Camera.DestinationType.FILE_URI,
+					sourceType: Camera.PictureSourceType.PHOTOLIBRARY
 				};
 				navigator.camera.getPicture(onPhotoURISuccess, onFail, {libraryOptions);
 			}
