@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<meta name="msapplication-tap-highlight" content="no" />
+
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+		<script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        
+        <title>Device</title>
+    </head>
+    <body>
+
+        <div class="app">
+            <h1>Device Info</h1> 
+            <table border="1" width="80%">
+				<tr>
+					<td>Device Name</td>
+					<td id="deviceName"></td>
+				</tr> 
+				<tr>
+					<td>PhoneGap Version</td>
+					<td id="version"></td> 
+				</tr>
+				<tr>
+					<td>Mobile Platform</td>
+					<td id="mobilePlatform"></td>
+				</tr> <tr>
+					<td>Platform Version</td>
+					<td id="platformVersion"></td> 
+				</tr>
+				<tr>
+					<td>UUID</td>
+					<td id="uuid"></td>
+				</tr>
+    		</table>
+        </div>
+
+        <script type="text/javascript">
+        	document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+				document.getElementById("deviceName").innerHTML			= device.name; 
+				document.getElementById("version").innerHTML 			= device.cordova; 
+				document.getElementById("mobilePlatform").innerHTML		= device.platform; 
+				document.getElementById("platformVersion").innerHTML 	= device.version; 
+				document.getElementById("uuid").innerHTML 				= device.uuid;
+			}
+        </script>
+    </body>
+</html>
