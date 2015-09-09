@@ -24,7 +24,6 @@
   			document.addEventListener("deviceready", onDeviceReady, false); 
 
 			function onDeviceReady() {
-				// find all contacts
 				var options = new ContactFindOptions();
 				options.filter="";
 				options.multiple = true;
@@ -42,8 +41,8 @@
 				} 
 			};
 			
-			function onError() { 
-				alert('onError!');
+			function onError(error) { 
+				alert('Error: '    + error.code    + '\n' + error.message + '\n');
 			};
 
         </script>
