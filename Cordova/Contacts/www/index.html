@@ -10,40 +10,41 @@
 
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        
+
         <title>Contacts</title>
     </head>
     <body>
 
         <div class="app">
-			<h1>Contacts</h1> 
-			<ul id="list"></ul>
+    			<h1>Contacts</h1>
+    			<ul id="list"></ul>
         </div>
 
         <script type="text/javascript">
-  			document.addEventListener("deviceready", onDeviceReady, false); 
+            document.addEventListener("deviceready", onDeviceReady, false);
 
-			function onDeviceReady() {
-				var options = new ContactFindOptions();
-				options.filter="";
-				options.multiple = true;
-				var fields = ["name"]; navigator.contacts.find(fields, onSuccess, onError, options);
-			}
-			
-			function onSuccess(contacts) {
-				alert(contacts.length);
-				var ul = document.getElementById("list"); 
-				for(var index = 0; index < contacts.length; index++) {
-					var name = contacts[index].name.formatted;
-					var li = document.createElement('li');
-					li.innerHTML = "<p>" + name + "</a>"; 
-					ul.appendChild(li);
-				} 
-			};
-			
-			function onError(error) { 
-				alert('Error: '    + error.code    + '\n' + error.message + '\n');
-			};
+            function onDeviceReady() {
+              var options = new ContactFindOptions();
+              options.filter="";
+              options.multiple = true;
+              var fields = ["name"];
+              navigator.contacts.find(fields, onSuccess, onError, options);
+            }
+
+            function onSuccess(contacts) {
+              alert(contacts.length);
+              var ul = document.getElementById("list");
+              for(var index = 0; index < contacts.length; index++) {
+              	var name = contacts[index].name.formatted;
+              	var li = document.createElement('li');
+              	li.innerHTML = "<p>" + name + "</p>";
+              	ul.appendChild(li);
+              }
+            };
+
+            function onError(error) {
+              alert('Error: '    + error.code    + '\n' + error.message + '\n');
+            };
 
         </script>
     </body>
