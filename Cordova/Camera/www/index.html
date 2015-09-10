@@ -1,68 +1,73 @@
 <!DOCTYPE html>
+<html>
+  <head>
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-		<meta name="msapplication-tap-highlight" content="no" />
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="msapplication-tap-highlight" content="no" />
 
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
 
-		<script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
-        <title>Camera Demo</title>
-    </head>
-    <body>
+    <title>Capture Photo</title>
 
-        <div class="app">
-			<h1 style="margin-top:50%">Camera</h1>
-			<br>
-			<button id="capture" >Capture Image</button>
-			<button id="choose" >Choose Image</button>
-	        <img id="finalImage" style="max-height: 100%; max-width: 100%;"></img>
-        </div>
+  </head>
+  <body>
+    <button onclick="capturePhoto();">Capture Photo</button> <br>
+    <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
+    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+    <img style="display:none;" id="largeImage" src="" />
 
+    <script type="text/javascript" charset="utf-8">
 
+        var pictureSource;   // picture source
+        var destinationType; // sets the format of returned value
 
-        <script type="text/javascript">
-  			document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener("deviceready",onDeviceReady,false);
 
-			function onDeviceReady() {
-				var cap = document.getElementById("capture");
-				cap.addEventListener("click",captureImage());
-				var pick = document.getElementById("choose");
-				pick.addEventListener("click",chooseImage());
-			}
+        function onDeviceReady() {
+            pictureSource=navigator.camera.PictureSourceType;
+            destinationType=navigator.camera.DestinationType;
+        }
 
-			// Shoot
-			function captureImage(){
-				var cameraOptions = {
-					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URL
-				};
-				navigator.camera.getPicture( onCameraImageSuccess, onCameraImageError, cameraOptions);
-			};
+        function onPhotoDataSuccess(imageData) {
+          var smallImage = document.getElementById('smallImage');
+          smallImage.style.display = 'block';
+          smallImage.src = "data:image/jpeg;base64," + imageData;
+        }
 
-			function onCameraImageSuccess(imageData) {
-				var image = document.getElementById('finalImage');
-				image.src = "data:image/jpeg;base64," + imageData;
-			}
+        function onPhotoURISuccess(imageURI) {
+          var largeImage = document.getElementById('largeImage');
+          largeImage.style.display = 'block';
+          largeImage.src = imageURI;
+        }
 
-			function onCameraImageError(error) {
-				alert('code: ' + error.code + '\n' +'message: ' + error.message + '\n');
-			}
+        function capturePhoto() {
+          navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+            destinationType: destinationType.DATA_URL });
+        }
 
-			// Pick
-			function chooseImage(source) {
-				var libraryOptions = {
-					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
-					sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-				};
-				navigator.camera.getPicture(onPhotoURISuccess, onFail, {libraryOptions);
-			}
+        function capturePhotoEdit() {
+          navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+            destinationType: destinationType.DATA_URL });
+        }
 
-        </script>
-    </body>
+        function getPhoto(source) {
+          navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+            destinationType: destinationType.FILE_URI,
+            sourceType: source });
+        }
+
+        function onFail(message) {
+          alert('Failed because: ' + message);
+        }
+
+    </script>
+
+  </body>
 </html>
